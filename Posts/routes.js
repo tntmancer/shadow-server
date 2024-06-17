@@ -7,6 +7,18 @@ export default function PostRoutes(app) {
   };
   app.get("/api/circles/:circleId/posts", findPostsForCircle);
 
+  const findAllPosts = async (req, res) => {
+    const posts = await dao.findAllPosts();
+    res.json(posts);
+  };
+  app.get("/api/posts", findAllPosts);
+
+  const findPublicPosts = async (req, res) => {
+    const posts = await dao.findPublicPosts();
+    res.json(posts);
+  };
+  app.get("/api/posts/public", findPublicPosts);
+
   const createPost = async (req, res) => {
     const newPost = {
       ...req.body,

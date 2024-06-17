@@ -21,7 +21,8 @@ const profileSchema = new mongoose.Schema({
       posts: [String],
       replies: [String],
       likes: [String],
-      memberOf: [String]
+      memberOf: [String],
+      moderatorOf: [String]
     }
   },
   { collection: "profiles" }
