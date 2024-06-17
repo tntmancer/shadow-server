@@ -1,4 +1,4 @@
-import model from "./model.js";
+import { model } from "./model.js";
 import { model as profileModel } from "../Profiles/model.js";
 import e from "express";
 

@@ -3,10 +3,10 @@ import session from "express-session";
 import mongoose from "mongoose";
 import "dotenv/config";
 import cors from "cors";
-import ProfileRoutes from "./Profiles/routes";
-import PostRoutes from "./Posts/routes";
-import ReplyRoutes from "./Replies/routes";
-import CircleRoutes from "./Circles/routes";
+import ProfileRoutes from "./Profiles/routes.js";
+import PostRoutes from "./Posts/routes.js";
+import ReplyRoutes from "./Replies/routes.js";
+import CircleRoutes from "./Circles/routes.js";
 
 const CONNECTION_STRING = process.env.MONGO_CONNECTION_STRING || "mongodb://127.0.0.1:27017/cabal"
 mongoose.connect(CONNECTION_STRING);

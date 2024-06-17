@@ -1,4 +1,4 @@
-import dao from "./dao.js";
+import * as dao from "./dao.js";
 
 export default function ReplyRoutes(app) {
     const findRepliesForPost = async (req, res) => {

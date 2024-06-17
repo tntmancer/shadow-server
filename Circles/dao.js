@@ -1,4 +1,4 @@
-import model from "./model.js";
+import {model} from "./model.js";
 import { model as profileModel } from "../Profiles/model.js";
 
 export const fetchAllCircles = async (circleId) => {

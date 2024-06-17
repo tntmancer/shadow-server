@@ -1,4 +1,4 @@
-import model from "./model.js";
+import {model} from "./model.js";
 
 export const findAllProfiles = async () => {
     return model.find();

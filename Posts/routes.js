@@ -43,14 +43,20 @@ export default function PostRoutes(app) {
   app.put("/api/posts/:postId", updatePost);
 
   const findPostsForProfile = async (req, res) => {
-    const posts = await dao.findPostsForUser(req.params.profileId);
+    const posts = await dao.findPostsForProfile(req.params.profileId);
     res.json(posts);
   };
   app.get("/api/profiles/:profileId/posts", findPostsForProfile);
 
   const findLikedPostsForProfile = async (req, res) => {
-    const posts = await dao.findLikedPostsForUser(req.params.profileId);
+    const posts = await dao.findLikedPostsForProfile(req.params.profileId);
     res.json(posts);
   };
   app.get("/api/profiles/:profileId/likes", findLikedPostsForProfile);
+
+  const findPostForId = async (req, res) => {
+    const post = await dao.findPostForId(req.params.postId);
+    res.json(post);
+  };
+  app.get("/api/posts/:postId", findPostForId);
 }
