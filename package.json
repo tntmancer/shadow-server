@@ -1,0 +1,26 @@
+{
+  "name": "shadow-server",
+  "version": "1.0.0",
+  "description": "A server for a CS5620 final project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tntmancer/shadow-server.git"
+  },
+  "author": "Tim Bennett",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tntmancer/shadow-server/issues"
+  },
+  "homepage": "https://github.com/tntmancer/shadow-server#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "mongoose": "^8.4.1"
+  }
+}
