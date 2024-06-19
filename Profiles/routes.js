@@ -45,9 +45,9 @@ export default function ProfileRoutes(app) {
 
     const anonymous = async (req, res) => {
         // console.log(req.body);
-        const currentProfile = await dao.findProfileById("66724d3398b1ba4f226dd9bc");
-        req.session["currentProfile"] = currentProfile;
-        res.json(currentProfile);
+        // const currentProfile = await dao.findProfileById("66724d3398b1ba4f226dd9bc");
+        req.session["currentProfile"] = null;
+        res.send(req.session["currentProfile"]);
         console.log(req.session["currentProfile"]);
     };
     app.post("/api/anonymous", anonymous);
@@ -60,8 +60,9 @@ export default function ProfileRoutes(app) {
 
     const profile = (req, res) => {
         const currentProfile = req.session["currentProfile"];
-        if (!currentProfile) {
-          res.sendStatus(401);
+        if (currentProfile === null) {
+          // res.sendStatus(401);
+          res.send(null);
           return;
         }
         res.json(currentProfile);
