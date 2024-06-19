@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 const profileSchema = new mongoose.Schema({
+    // Maybe make an enum for role?
     role: { type: String, required: true },
     username: { type: String, required: true, unique: true},
     sensitiveData: {

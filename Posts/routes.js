@@ -59,4 +59,22 @@ export default function PostRoutes(app) {
     res.json(post);
   };
   app.get("/api/posts/:postId", findPostForId);
+
+  const findAuthorForPost = async (req, res) => {
+    const author = await dao.findAuthorForPost(req.params.postId);
+    res.json(author);
+  };
+  app.get("/api/posts/:postId/author", findAuthorForPost);
+
+  const likePost = async (req, res) => {
+    const status = await dao.likePost(req.params.postId, req.params.profileId);
+    res.json(status);
+  };
+  app.post("/api/profiles/:profileId/likes/:postId", likePost);
+
+  const unlikePost = async (req, res) => {
+    const status = await dao.unlikePost(req.params.postId, req.params.profileId);
+    res.json(status);
+  };
+  app.delete("/api/profiles/:profileId/likes/:postId", unlikePost);
 }

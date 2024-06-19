@@ -12,6 +12,61 @@ export default function ProfileRoutes(app) {
         res.json(profiles);
     };
     app.get("/api/profiles", findAllProfiles);
+
+    // const findProfileByUsername = async (req, res) => {
+    //     const profile = await dao.findProfileByUsername(req.params.username);
+    //     res.json(profile);
+    // };
+
+    const signup = async (req, res) => {
+        console.log(req.body);
+        const profile = await dao.findProfileByUsername(req.body.username);
+        if (profile) {
+          res.status(400).json({ message: "Username already taken" });
+          return;
+        }
+        const currentProfile = await dao.createProfile(req.body);
+        req.session["currentProfile"] = currentProfile;
+        res.json(currentProfile);
+    };
+    app.post("/api/signup", signup);
+
+    const signin = async (req, res) => {
+        const { username, password } = req.body;
+        const currentProfile = await dao.findProfileByCredentials(username, password);
+        if (currentProfile) {
+          req.session["currentProfile"] = currentProfile;
+          res.json(currentProfile);
+        } else {
+          res.status(401).json({ message: "Unable to login. Try again later." });
+        }
+    };
+    app.post("/api/signin", signin);
+
+    const anonymous = async (req, res) => {
+        // console.log(req.body);
+        const currentProfile = await dao.findProfileById("66724d3398b1ba4f226dd9bc");
+        req.session["currentProfile"] = currentProfile;
+        res.json(currentProfile);
+        console.log(req.session["currentProfile"]);
+    };
+    app.post("/api/anonymous", anonymous);
+
+    const signout = (req, res) => {
+        req.session.destroy();
+        res.sendStatus(200);
+    };
+    app.post("/api/signout", signout);
+
+    const profile = (req, res) => {
+        const currentProfile = req.session["currentProfile"];
+        if (!currentProfile) {
+          res.sendStatus(401);
+          return;
+        }
+        res.json(currentProfile);
+    };
+    app.post("/api/profile", profile);
     
     const findProfileById = async (req, res) => {
         const profile = await dao.findProfileById(req.params.profileId);

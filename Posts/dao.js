@@ -32,7 +32,16 @@ export const findLikedPostsForProfile = async (profileId) => {
     const profile = await profileModel.findById(profileId);
     return model.find({ _id: { $in: profile.profileData.likes } });
 }
-
 export const findPostForId = async (postId) => {
     return model.findById(postId);
+}
+export const findAuthorForPost = async (postId) => {
+    const post = await model.findById(postId);
+    return profileModel.findById(post.author);
+}
+export const likePost = async (postId, profileId) => {
+    return profileModel.updateOne({ _id: profileId }, { $push: { "profileData.likes": postId } });
+}
+export const unlikePost = async (postId, profileId) => {
+    return profileModel.updateOne({ _id: profileId }, { $pull: { "profileData.likes": postId } });
 }

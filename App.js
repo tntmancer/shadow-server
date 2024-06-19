@@ -33,6 +33,10 @@ if (process.env.NODE_ENV !== "development") {
 app.use(session(sessionOptions));
 app.use(express.json()); // do all your work after this line
 
+// const app = express();
+// app.use(cors());
+// app.use(express.json()); // do all your work after this line
+
 ProfileRoutes(app);
 PostRoutes(app);
 ReplyRoutes(app);

@@ -20,3 +20,9 @@ export const updateProfile = async (profileId, profile) => {
 export const deleteProfile = async (profileId) => {
     return model.deleteOne({ _id: profileId });
 }
+export const findProfileByUsername = async (username) => {
+    return model.findOne({username: username});
+}
+export const findProfileByCredentials = async (username, password) => {
+    return model.findOne({username: username, password: password});
+}
