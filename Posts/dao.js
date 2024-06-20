@@ -36,8 +36,7 @@ export const findPostForId = async (postId) => {
     return model.findById(postId);
 }
 export const findAuthorForPost = async (postId) => {
-    const post = await model.findById(postId);
-    return profileModel.findById(post.author);
+    return profileModel.findOne({ "profileData.posts": postId });
 }
 export const likePost = async (postId, profileId) => {
     return profileModel.updateOne({ _id: profileId }, { $push: { "profileData.likes": postId } });

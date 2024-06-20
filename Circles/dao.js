@@ -18,3 +18,6 @@ export const findCirclesForModerator = async (moderatorId) => {
     const circles = await profileModel.findById(userId).select('profileData.moderatorOf');
     return model.find({ _id: { $in: circles } });
 }
+export const findModeratorsForCircle = async (circleId) => {
+    return profileModel.find({ "profileData.moderatorOf": circleId });
+}
