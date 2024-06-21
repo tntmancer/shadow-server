@@ -7,7 +7,7 @@ export const findRepliesForPost = async (postId) => {
 }
 export const findRepliesForUser = async (userId) => {
     profile = await profileModel.findById(userId);
-    return model.find({ _id: { $in: profile.profileData.replies } });
+    return model.find({ _id: { $in: profile.replies } });
 }
 export const createReply = async (newReply) => {
     delete module._id;
@@ -21,4 +21,7 @@ export const updateReply = async (replyId, reply) => {
 }
 export const findReplyForId = async (replyId) => {
     return model.findById(replyId);
+}
+export const findAuthorForReply = async (replyId) => {
+    return profileModel.findOne({ "replies": replyId });
 }

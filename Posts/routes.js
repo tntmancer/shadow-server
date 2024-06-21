@@ -77,4 +77,10 @@ export default function PostRoutes(app) {
     res.json(status);
   };
   app.delete("/api/profiles/:profileId/likes/:postId", unlikePost);
+
+  const addPostToProfile = async (req, res) => {
+    const status = await dao.addPostToProfile(req.params.postId, req.params.profileId);
+    res.json(status);
+  }
+  app.post("/api/profiles/:profileId/posts/:postId", addPostToProfile);
 }

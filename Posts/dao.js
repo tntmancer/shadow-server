@@ -44,3 +44,6 @@ export const likePost = async (postId, profileId) => {
 export const unlikePost = async (postId, profileId) => {
     return profileModel.updateOne({ _id: profileId }, { $pull: { "profileData.likes": postId } });
 }
+export const addPostToProfile = async (postId, profileId) => {
+    return profileModel.updateOne({ _id: profileId }, { $push: { "profileData.posts": postId } });
+}
