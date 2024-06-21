@@ -25,3 +25,6 @@ export const findReplyForId = async (replyId) => {
 export const findAuthorForReply = async (replyId) => {
     return profileModel.findOne({ "replies": replyId });
 }
+export const addReplyToProfile = async (replyId, profileId) => {
+    return profileModel.updateOne({ _id: profileId }, { $push: { "replies": replyId } });
+}

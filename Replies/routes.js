@@ -56,6 +56,12 @@ export default function ReplyRoutes(app) {
         res.json(author);
     };
     app.get("/api/replies/:replyId/author", findAuthorForReply);
+
+    const addReplyToProfile = async (req, res) => {
+        const profile = await dao.addReplyToProfile(req.params.profileId, req.params.replyId);
+        res.json(profile);
+    }
+    app.post("/api/profiles/:profileId/replies/:replyId", addReplyToProfile);
   }
 
 // We very likely need a function to fetch posts by partial description/title

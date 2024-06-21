@@ -11,13 +11,13 @@ export const findCircleForId = async (circleId) => {
     return model.findById(circleId);
 }
 export const findCirclesForMember = async (userId) => {
-    const circles = await profileModel.findById(userId).select('profileData.memberOf');
+    const circles = await profileModel.findById(userId).select('memberOf');
     return model.find({ _id: { $in: circles } });
 }
 export const findCirclesForModerator = async (moderatorId) => {
-    const circles = await profileModel.findById(userId).select('profileData.moderatorOf');
+    const circles = await profileModel.findById(userId).select('moderatorOf');
     return model.find({ _id: { $in: circles } });
 }
 export const findModeratorsForCircle = async (circleId) => {
-    return profileModel.find({ "profileData.moderatorOf": circleId });
+    return profileModel.find({ "moderatorOf": circleId });
 }

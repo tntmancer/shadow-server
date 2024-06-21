@@ -3,15 +3,12 @@ const profileSchema = new mongoose.Schema({
     // Maybe make an enum for role?
     role: { type: String, required: true },
     username: { type: String, required: true, unique: true},
-    sensitiveData: {
       realName: { type: String, required: true },
       email: { type: String, required: true },
       password: { type: String, required: true },
       address: { type: String, required: true },
       phone: { type: String, required: true },
-      birthday: { type: String, required: true }
-    },
-    profileData: {
+      birthday: { type: String, required: true },
       avatar: { type: String, required: true },
       bio: { type: String, required: true },
       memberSince: { type: String, required: true },
@@ -24,7 +21,6 @@ const profileSchema = new mongoose.Schema({
       likes: [String],
       memberOf: [String],
       moderatorOf: [String]
-    }
   },
   { collection: "profiles" }
 );

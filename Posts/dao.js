@@ -26,24 +26,24 @@ export const updatePost = async (postId, post) => {
 // Hopefully this is the correct way to do this
 export const findPostsForProfile = async (profileId) => {
     const profile = await profileModel.findById(profileId);
-    return model.find({ _id: { $in: profile.profileData.posts } });
+    return model.find({ _id: { $in: profile.posts } });
 }
 export const findLikedPostsForProfile = async (profileId) => {
     const profile = await profileModel.findById(profileId);
-    return model.find({ _id: { $in: profile.profileData.likes } });
+    return model.find({ _id: { $in: profile.likes } });
 }
 export const findPostForId = async (postId) => {
     return model.findById(postId);
 }
 export const findAuthorForPost = async (postId) => {
-    return profileModel.findOne({ "profileData.posts": postId });
+    return profileModel.findOne({ "posts": postId });
 }
 export const likePost = async (postId, profileId) => {
-    return profileModel.updateOne({ _id: profileId }, { $push: { "profileData.likes": postId } });
+    return profileModel.updateOne({ _id: profileId }, { $push: { "likes": postId } });
 }
 export const unlikePost = async (postId, profileId) => {
-    return profileModel.updateOne({ _id: profileId }, { $pull: { "profileData.likes": postId } });
+    return profileModel.updateOne({ _id: profileId }, { $pull: { "likes": postId } });
 }
 export const addPostToProfile = async (postId, profileId) => {
-    return profileModel.updateOne({ _id: profileId }, { $push: { "profileData.posts": postId } });
+    return profileModel.updateOne({ _id: profileId }, { $push: { "posts": postId } });
 }
