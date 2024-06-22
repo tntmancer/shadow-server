@@ -6,7 +6,6 @@ export const findAllProfiles = async () => {
 export const findProfileById = async (profileId) => {
     return model.findById(profileId);
 }
-// ??? maybe querify it?
 export const findProfilesByRole = async (role) => {
     return model.find({ role: role });
 }
@@ -24,7 +23,7 @@ export const findProfileByUsername = async (username) => {
     return model.findOne({username: username});
 }
 export const findProfileByCredentials = async (username, password) => {
-    return model.findOne({username: username, password: password});
+    return model.findOne({username: username, password : password});
 }
 // export const findAuthorForPost = async (postId) => {
 //     // Find a profile that has a post with the given postId
