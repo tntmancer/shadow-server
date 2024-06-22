@@ -78,9 +78,9 @@ export default function ProfileRoutes(app) {
     // Account Authentication Management
     const signin = async (req, res) => {
         const { username, password } = req.body;
+        console.log(username, password);
         const currentProfile
             = await dao.findProfileByCredentials(username, password);
-
         if (currentProfile) {
             req.session["currentProfile"] = currentProfile;
             res.json(currentProfile);
