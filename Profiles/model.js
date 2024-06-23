@@ -1,4 +1,4 @@
 import mongoose from "mongoose";
 import schema from "./schema.js";
-const model = mongoose.model("ProfileModel", schema);
+const model = mongoose.model("NewProfileModel", schema);
 export { model };

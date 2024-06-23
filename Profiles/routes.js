@@ -85,7 +85,7 @@ export default function ProfileRoutes(app) {
             req.session["currentProfile"] = currentProfile;
             res.json(currentProfile);
         } else {
-            res.status(401).json({message: "Cannot find profile with these credentials."});
+            res.status(401).json({message: "Invalid credentials."});
         }
     };
     app.post(`${PROFILES_API}/signin`, signin);
