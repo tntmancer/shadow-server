@@ -11,7 +11,7 @@ export const findRepliesForUser = async (userId) => {
 }
 export const createReply = async (newReply) => {
     delete newReply._id;
-    console.log(newReply);
+    // console.log(newReply);
     return model.create(newReply);
 }
 export const deleteReply = async (replyId) => {
