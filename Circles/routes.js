@@ -36,6 +36,18 @@ export default function CircleRoutes(app) {
         res.json(moderators);
     }
     app.get("/api/circles/:circleId/moderators", findModeratorsForCircle);
+
+    const joinCircle = async (req, res) => {
+        const status = await dao.joinCircle(req.params.circleId, req.params.userId);
+        res.json(status);
+    }
+    app.put("/api/circles/:circleId/member/:userId", joinCircle);
+
+    const leaveCircle = async (req, res) => {
+        const status = await dao.leaveCircle(req.params.circleId, req.params.userId);
+        res.json(status);
+    }
+    app.put("/api/circles/:circleId/member/:userId", leaveCircle);
 }
 // We very likely need a function to fetch circles by partial title
 // See profiles for example
