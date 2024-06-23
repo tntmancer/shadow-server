@@ -14,10 +14,12 @@ export const findPublicPosts = async () => {
     return model.find({ circle: { $in: publicCircleIds } });
 }
 export const createPost = async (newPost) => {
-    delete module._id;
+    delete newPost._id;
     return model.create(newPost);
 }
 export const deletePost = async (postId) => {
+    // Also delete post from profile
+    await profileModel.updateMany({ posts: postId }, { $pull: { posts: postId } });
     return model.deleteOne({ _id: postId });
 }
 export const updatePost = async (postId, post) => {
@@ -39,10 +41,12 @@ export const findAuthorForPost = async (postId) => {
     return profileModel.findOne({ "posts": postId });
 }
 export const likePost = async (postId, profileId) => {
-    return profileModel.updateOne({ _id: profileId }, { $push: { "likes": postId } });
+    return profileModel.findByIdAndUpdate(profileId, { $addToSet: { "likes": postId } });
 }
 export const unlikePost = async (postId, profileId) => {
-    return profileModel.updateOne({ _id: profileId }, { $pull: { "likes": postId } });
+    // console.log("unlikePost");
+    return profileModel.findByIdAndUpdate(profileId, { $pull: { "likes": postId } });
+    // return profileModel.updateOne({ _id: profileId }, { $pull: { "likes": postId } });
 }
 export const addPostToProfile = async (postId, profileId) => {
     return profileModel.updateOne({ _id: profileId }, { $push: { "posts": postId } });

@@ -10,7 +10,8 @@ export const findRepliesForUser = async (userId) => {
     return model.find({ _id: { $in: profile.replies } });
 }
 export const createReply = async (newReply) => {
-    delete module._id;
+    delete newReply._id;
+    console.log(newReply);
     return model.create(newReply);
 }
 export const deleteReply = async (replyId) => {

@@ -22,7 +22,7 @@ export default function PostRoutes(app) {
   const createPost = async (req, res) => {
     const newPost = {
       ...req.body,
-      community: req.params.circleId,
+      circle: req.params.circleId,
     };
     // Need _id?
     const post = await dao.createPost(newPost);

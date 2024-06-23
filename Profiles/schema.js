@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 const profileSchema = new mongoose.Schema({
-
     role: { type: String, required: true },
     username: { type: String, required: true, unique: true},
     realName: { type: String },
