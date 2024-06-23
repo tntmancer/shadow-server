@@ -4,7 +4,7 @@ export const findAllProfiles = async () => {
     return model.find();
 }
 export const findProfileById = async (profileId) => {
-    console.log(profileId);
+    // console.log(profileId);
     return model.findById(profileId);
 }
 export const findProfilesByRole = async (role) => {

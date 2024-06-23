@@ -24,8 +24,10 @@ export const findModeratorsForCircle = async (circleId) => {
     return profileModel.find({ "moderatorOf": circleId });
 }
 export const joinCircle = async (circleId, userId) => {
-    return profileModel.findByIdAndUpdate(userId, { $addToSet: { "memberOf:": circleId } });
+    // console.log("circle", circleId, "user", userId);
+    return profileModel.findByIdAndUpdate(userId, { $addToSet: { "memberOf": circleId } });
 }
 export const leaveCircle = async (circleId, userId) => {
+    console.log("circle", circleId, "user", userId);
     return profileModel.findByIdAndUpdate(userId, { $pull: { "memberOf": circleId } });
 }
