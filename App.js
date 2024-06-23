@@ -11,9 +11,6 @@ import CircleRoutes from "./Circles/routes.js";
 const CONNECTION_STRING = process.env.MONGO_CONNECTION_STRING || "mongodb://127.0.0.1:27017/cabal"
 mongoose.connect(CONNECTION_STRING);
 
-console.log("Netlify URL", process.env.NETLIFY_URL);
-console.log("Render URL", process.env.NODE_SERVER_DOMAIN);
-
 const app = express();
 app.use(cors({
     credentials: true,
