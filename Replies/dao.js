@@ -1,14 +1,17 @@
 import { model } from "./model.js";
 import { model as profileModel } from "../Profiles/model.js";
+import { model as postModel } from "../Posts/model.js";
 import e from "express";
 
 export const findRepliesForPost = async (postId) => {
     return model.find({ post: postId });
 }
 export const findRepliesForUser = async (userId) => {
-    profile = await profileModel.findById(userId);
-    return model.find({ _id: { $in: profile.replies } });
+    const repliesFound = await profileModel.findById(userId).select('replies');
+    const replies = repliesFound['posts']
+    return model.find({ _id: { $in: replies } });
 }
+
 export const createReply = async (newReply) => {
     delete newReply._id;
     // console.log(newReply);

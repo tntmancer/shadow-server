@@ -8,6 +8,13 @@ export default function PostRoutes(app) {
   app.get("/api/circles/:circleId/posts", findPostsForCircle);
 
   const findAllPosts = async (req, res) => {
+    const {partialName} = req.query;
+    if (partialName) {
+        const posts = await dao.findPostsByPartialName(partialName);
+        res.json(posts);
+        return;
+    }
+
     const posts = await dao.findAllPosts();
     res.json(posts);
   };

@@ -31,3 +31,10 @@ export const leaveCircle = async (circleId, userId) => {
     console.log("circle", circleId, "user", userId);
     return profileModel.findByIdAndUpdate(userId, { $pull: { "memberOf": circleId } });
 }
+
+export const findCirclesByPartialName = (partialName) => {
+    const regex = new RegExp(partialName, "i"); // 'i' makes it case-insensitive
+    return model.find({
+        $or: [{name: {$regex: regex}}, {description: {$regex: regex}}],
+    });
+};

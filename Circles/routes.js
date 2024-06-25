@@ -2,9 +2,16 @@ import * as dao from "./dao.js";
 
 export default function CircleRoutes(app) {
     const fetchAllCircles = async (req, res) => {
+        const {partialName} = req.query;
+        if (partialName) {
+            const circles = await dao.findCirclesByPartialName(partialName);
+            res.json(circles);
+            return;
+        }
+
         const circles = await dao.fetchAllCircles();
         res.json(circles);
-    }
+    };
     app.get("/api/circles", fetchAllCircles);
 
     const fetchAllPublicCircles = async (req, res) => {

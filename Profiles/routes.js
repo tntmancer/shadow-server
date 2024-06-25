@@ -17,7 +17,7 @@ export default function ProfileRoutes(app) {
     app.post(PROFILES_API, createProfile);
 
     const findAllProfiles = async (req, res) => {
-        const {role, name, ids} = req.query;
+        const {role, name, ids, partialName} = req.query;
         if (role) {
             const profiles = await dao.findProfilesByRole(role);
             res.json(profiles);
@@ -37,6 +37,12 @@ export default function ProfileRoutes(app) {
             res.json(profiles);
             return;
         }
+        if (partialName) {
+            const profiles = await dao.findProfilesByPartialName(partialName);
+            res.json(profiles);
+            return;
+        }
+
 
         const profiles = await dao.findAllProfiles();
         res.json(profiles);

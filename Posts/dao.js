@@ -27,12 +27,14 @@ export const updatePost = async (postId, post) => {
 }
 // Hopefully this is the correct way to do this
 export const findPostsForProfile = async (profileId) => {
-    const profile = await profileModel.findById(profileId);
-    return model.find({ _id: { $in: profile.posts } });
+    const postsFound = await profileModel.findById(profileId).select('posts');
+    const posts = postsFound['posts']
+    return model.find({ _id: { $in: posts } });
 }
 export const findLikedPostsForProfile = async (profileId) => {
-    const profile = await profileModel.findById(profileId);
-    return model.find({ _id: { $in: profile.likes } });
+    const likesFound = await profileModel.findById(profileId).select('likes');
+    const likes = likesFound['likes']
+    return model.find({ _id: { $in: likes } });
 }
 export const findPostForId = async (postId) => {
     return model.findById(postId);
@@ -51,3 +53,10 @@ export const unlikePost = async (postId, profileId) => {
 export const addPostToProfile = async (postId, profileId) => {
     return profileModel.updateOne({ _id: profileId }, { $push: { "posts": postId } });
 }
+
+export const findPostsByPartialName = (partialName) => {
+    const regex = new RegExp(partialName, "i"); // 'i' makes it case-insensitive
+    return model.find({
+        $or: [{title: {$regex: regex}}, {body: {$regex: regex}}],
+    });
+};

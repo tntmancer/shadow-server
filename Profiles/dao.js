@@ -26,7 +26,7 @@ export const findProfileByUsername = async (username) => {
 export const findProfileByCredentials = async (username, password) => {
     return model.findOne({username: username, password : password});
 }
-// export const findAuthorForPost = async (postId) => {
-//     // Find a profile that has a post with the given postId
-//     return model.findOne({ "profileData.posts": postId });
-// }
+export const findProfilesByPartialName = (partialName) => {
+    const regex = new RegExp(partialName, "i"); // 'i' makes it case-insensitive
+    return model.find({username: {$regex: regex}});
+};
