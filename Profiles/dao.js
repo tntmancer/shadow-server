@@ -30,3 +30,11 @@ export const findProfilesByPartialName = (partialName) => {
     const regex = new RegExp(partialName, "i"); // 'i' makes it case-insensitive
     return model.find({username: {$regex: regex}});
 };
+
+export const findProfilesInCircle = async (circleId) => {
+    return model.find({memberOf: circleId });
+}
+
+export const findProfilesNotInCircle = async (circleId) => {
+    return model.find({memberOf: { $ne: circleId }});
+}

@@ -17,7 +17,7 @@ export default function ProfileRoutes(app) {
     app.post(PROFILES_API, createProfile);
 
     const findAllProfiles = async (req, res) => {
-        const {role, name, ids, partialName} = req.query;
+        const {role, name, ids, partialName, notInCircleId, inCircleId} = req.query;
         if (role) {
             const profiles = await dao.findProfilesByRole(role);
             res.json(profiles);
@@ -42,7 +42,16 @@ export default function ProfileRoutes(app) {
             res.json(profiles);
             return;
         }
-
+        if (notInCircleId) {
+            const profiles = await dao.findProfilesNotInCircle(notInCircleId);
+            res.json(profiles);
+            return;
+        }
+        if (inCircleId) {
+            const profiles = await dao.findProfilesInCircle(inCircleId);
+            res.json(profiles);
+            return;
+        }
 
         const profiles = await dao.findAllProfiles();
         res.json(profiles);
